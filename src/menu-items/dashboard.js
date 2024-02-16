@@ -1,8 +1,8 @@
 // assets
-import { IconDashboard } from '@tabler/icons-react';
+import { IconDashboard, IconSettings, IconLanguage, IconMessageChatbot } from '@tabler/icons-react';
 
 // constant
-const icons = { IconDashboard };
+const icons = { IconDashboard, IconSettings, IconLanguage, IconMessageChatbot };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -24,23 +24,23 @@ const dashboard = {
       title: 'Translate Certificate',
       type: 'item',
       url: '/translate-certificate',
-      icon: icons.IconDashboard,
+      icon: icons.IconLanguage,
       breadcrumbs: false
     },
     {
       id: 'settings',
       title: 'Settings',
       type: 'item',
-      url: '/dashboard/default',
-      icon: icons.IconDashboard,
+      url: '/settings',
+      icon: icons.IconSettings,
       breadcrumbs: false
     },
     {
       id: 'support',
       title: 'Support',
       type: 'item',
-      url: '/dashboard/default',
-      icon: icons.IconDashboard,
+      url: '/support',
+      icon: icons.IconMessageChatbot,
       breadcrumbs: false
     }
   ]

@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, ButtonBase } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 // project imports
 import LogoSection from '../LogoSection';
 import SearchSection from './SearchSection';
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
-
+import IconButton from '@mui/material/IconButton';
+import LogoutIcon from '@mui/icons-material/Logout';
 // assets
 import { IconMenu2 } from '@tabler/icons-react';
 
@@ -17,6 +19,7 @@ import { IconMenu2 } from '@tabler/icons-react';
 
 const Header = ({ handleLeftDrawerToggle }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -56,13 +59,26 @@ const Header = ({ handleLeftDrawerToggle }) => {
       </Box>
 
       {/* header search */}
-      <SearchSection />
+      {/* <SearchSection /> */}
       <Box sx={{ flexGrow: 1 }} />
       <Box sx={{ flexGrow: 1 }} />
 
       {/* notification & profile */}
       <NotificationSection />
       <ProfileSection />
+      {/* <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', position: 'absolute', bottom: '30px' }}> */}
+      {/* <Button variant="contained" endIcon={<LogoutIcon />} sx={{ m: 'auto' }}>
+        Logout
+      </Button> */}
+      <IconButton color="primary" aria-label="add to shopping cart">
+        <LogoutIcon
+          onClick={() => {
+            localStorage.removeItem('acc-token');
+            navigate('/login');
+          }}
+        />
+      </IconButton>
+      {/* </Box> */}
     </>
   );
 };

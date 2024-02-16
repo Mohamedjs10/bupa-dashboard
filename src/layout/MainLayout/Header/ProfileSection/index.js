@@ -89,26 +89,26 @@ const ProfileSection = () => {
 
   return (
     <>
-      <Chip
-        sx={{
-          height: '48px',
-          alignItems: 'center',
-          borderRadius: '27px',
-          transition: 'all .2s ease-in-out',
-          borderColor: theme.palette.primary.light,
-          backgroundColor: theme.palette.primary.light,
-          '&[aria-controls="menu-list-grow"], &:hover': {
-            borderColor: theme.palette.primary.main,
-            background: `${theme.palette.primary.main}!important`,
-            color: theme.palette.primary.light,
-            '& svg': {
-              stroke: theme.palette.primary.light
-            }
-          },
-          '& .MuiChip-label': {
-            lineHeight: 0
-          }
-        }}
+      {/* <Chip
+        // sx={{
+        //   height: '48px',
+        //   alignItems: 'center',
+        //   borderRadius: '27px',
+        //   transition: 'all .2s ease-in-out',
+        //   borderColor: theme.palette.primary.light,
+        //   backgroundColor: theme.palette.primary.light,
+        //   '&[aria-controls="menu-list-grow"], &:hover': {
+        //     borderColor: theme.palette.primary.main,
+        //     background: `${theme.palette.primary.main}!important`,
+        //     color: theme.palette.primary.light,
+        //     '& svg': {
+        //       stroke: theme.palette.primary.light
+        //     }
+        //   },
+        //   '& .MuiChip-label': {
+        //     lineHeight: 0
+        //   }
+        // }}
         icon={
           <Avatar
             src={User1}
@@ -123,13 +123,27 @@ const ProfileSection = () => {
             color="inherit"
           />
         }
-        label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
+        // label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
         variant="outlined"
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
         color="primary"
+      /> */}
+      <Avatar
+        // src={User1}
+        src="https://svgur.com/i/13AA.svg"
+        sx={{
+          ...theme.typography.mediumAvatar,
+          margin: '8px 0 8px 8px !important',
+          cursor: 'pointer'
+        }}
+        ref={anchorRef}
+        aria-controls={open ? 'menu-list-grow' : undefined}
+        aria-haspopup="true"
+        color="inherit"
+        onClick={handleToggle}
       />
       <Popper
         placement="bottom-end"
@@ -154,8 +168,9 @@ const ProfileSection = () => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
-                  <Box sx={{ p: 2 }}>
-                    <Stack>
+                  <Box sx={{ p: 2, width: '200px', height: '500px', textAlign: 'center' }}>
+                    Admin Info
+                    {/* <Stack>
                       <Stack direction="row" spacing={0.5} alignItems="center">
                         <Typography variant="h4">Good Morning,</Typography>
                         <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
@@ -180,9 +195,9 @@ const ProfileSection = () => {
                         'aria-label': 'weight'
                       }}
                     />
-                    <Divider />
+                    <Divider /> */}
                   </Box>
-                  <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
+                  {/* <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
                     <Box sx={{ p: 2 }}>
                       <UpgradePlanCard />
                       <Divider />
@@ -295,7 +310,7 @@ const ProfileSection = () => {
                         </ListItemButton>
                       </List>
                     </Box>
-                  </PerfectScrollbar>
+                  </PerfectScrollbar> */}
                 </MainCard>
               </ClickAwayListener>
             </Paper>

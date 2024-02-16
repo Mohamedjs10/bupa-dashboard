@@ -17,7 +17,7 @@ const LogoSection = () => {
   return (
     <ButtonBase disableRipple onClick={() => dispatch({ type: MENU_OPEN, id: defaultId })} component={Link} to={config.defaultPath}>
       {/* <Logo /> */}
-      <img src="./logo.svg" />
+      <img src="https://svgur.com/i/13Ag.svg" />
     </ButtonBase>
   );
 };

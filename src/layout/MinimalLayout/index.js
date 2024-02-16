@@ -8,7 +8,7 @@ import Customization from '../Customization';
 const MinimalLayout = () => (
   <div style={{ backgroundColor: '#f2faff', height: '100vh' }}>
     <Outlet />
-    <Customization />
+    {/* <Customization /> */}
   </div>
 );
 

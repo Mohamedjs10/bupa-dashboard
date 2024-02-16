@@ -16,6 +16,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
 const NavItem = ({ item, level }) => {
+  console.log(item);
   const theme = useTheme();
   const dispatch = useDispatch();
   const { pathname } = useLocation();

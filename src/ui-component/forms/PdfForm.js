@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './PdfForm.module.css';
-import Switch from '@mui/material/Switch';
 import { schema, initialValues } from '../../utils/schemas/pdfSchema.js';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -8,54 +7,35 @@ import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
 import { useTheme } from '@mui/material/styles';
-export default function PdfForm({ type, setOpen, setForceUpdate, setData, setIsLoading, currentId }) {
-  const theme = useTheme();
-
-  const [isUploading, setIsUploading] = useState(false);
-  const [isUploaded, setIsUploaded] = useState(false);
-  const [customColors, setCustomColors] = useState([]);
-  const [currentColor, setCurrentColor] = useState([]);
-  // const [currentItem, setCurrentItem] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands] = useState([]);
-
-  const sizes = ['sm', 'm', 'l', 'xl', 'xxl', 'xxxl'];
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250
-      }
-    }
-  };
-  if (type == 'product_update') {
-  }
+export default function PdfForm({ data, setStep }) {
+  console.log('PdfForm', data);
 
   const navigate = useNavigate();
 
   const onSubmit = async (values, actions) => {
-    axios
-      .post(
-        `${baseUrl}/api/documents`,
-        {
-          certificate: certificate,
-          national_ids: idImages
-        },
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${localStorage.getItem('acc-token')}`
-          }
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        setStep(5);
-        //   setData(res?.data);
-        //   setLoading(false);
-      });
+    setStep(0);
+    // send transaction to sohaila
+    // axios
+    //   .post(
+    //     `${baseUrl}/api/documents`,
+    //     {
+    //       certificate: certificate,
+    //       national_ids: idImages
+    //     },
+    //     {
+    //       headers: {
+    //         'Content-Type': 'multipart/form-data',
+    //         Authorization: `Bearer ${localStorage.getItem('acc-token')}`
+    //       }
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //     setStep(5);
+    //     //   setData(res?.data);
+    //     //   setLoading(false);
+    //   });
+    setStep(6);
   };
 
   const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit, setFieldValue } = useFormik({
@@ -106,7 +86,7 @@ export default function PdfForm({ type, setOpen, setForceUpdate, setData, setIsL
       </Box>
 
       <button className={styles.brown_button} type="submit">
-        Create
+        Convert to pdf file
       </button>
     </form>
   );

@@ -4,33 +4,36 @@ import Switch from '@mui/material/Switch';
 import { schema, initialValues } from '../../utils/schemas/loginSchema';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-
+import { baseUrl } from 'views/utilities/general';
 import Box from '@mui/material/Box';
-
+import { notifySuccess, notifyError } from 'utils/toastify';
 import { useTheme } from '@mui/material/styles';
-export default function LoginForm({ type, setOpen, setForceUpdate, setData, setIsLoading, currentId }) {
+import LinearProgress from '@mui/material/LinearProgress';
+import axios from 'axios';
+
+export default function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = async (values, actions) => {
+    setIsLoading(true);
+    console.log(values);
     axios
-      .post(
-        `${baseUrl}/api/documents`,
-        {
-          certificate: certificate,
-          national_ids: idImages
-        },
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${localStorage.getItem('acc-token')}`
-          }
-        }
-      )
+      .post(`${baseUrl}/api/auth/tokens/`, {
+        login: 's@test.com',
+        password: 'test-123456'
+      })
       .then((res) => {
-        console.log(res);
-        setStep(5);
-        //   setData(res?.data);
-        //   setLoading(false);
+        setIsLoading(false);
+        notifySuccess('Login Successful!');
+        navigate('/translate-certificate');
+        console.log(res.data.tokens.access);
+        localStorage.setItem('acc-token', res.data.tokens.access);
+      })
+      .catch((err) => {
+        console.log(err.response.data.detail);
+        setIsLoading(false);
+        notifyError(err.response.data.detail);
       });
   };
 
@@ -39,20 +42,6 @@ export default function LoginForm({ type, setOpen, setForceUpdate, setData, setI
     validationSchema: schema,
     onSubmit
   });
-  console.log(values);
-  console.log(errors);
-
-  function getStyles(name, sizes, theme) {
-    return {
-      fontWeight: sizes.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
-    };
-  }
-  const handleSelectChange = (event) => {
-    const {
-      target: { value }
-    } = event;
-    setFieldValue('sizes', typeof value === 'string' ? value.split(',') : value);
-  };
 
   return (
     <form
@@ -71,53 +60,65 @@ export default function LoginForm({ type, setOpen, setForceUpdate, setData, setI
     >
       <Box
         component="img"
-        src="./logo.svg"
+        src="https://svgur.com/i/13Ag.svg"
         sx={{
           width: '200px',
           my: '30px',
           mx: 'auto'
         }}
       />
-      {/* <div className={styles.title}>Hi admin, Please log in!</div> */}
 
-      {/* email */}
-      <div className={styles.label}>
-        <span>Email</span>
-        <span className={styles.error}> *</span>
-        {errors.email && touched.email && <span className="error">{errors.email}</span>}
-      </div>
-      <input
-        // className={`${styles.input} ${styles.bottom_margin}`}
-        value={values.email}
-        onChange={handleChange}
-        id="email"
-        type="email"
-        onBlur={handleBlur}
-        className={
-          errors.email && touched.email ? `${styles.input} ${styles.bottom_margin} input-error` : `${styles.input} ${styles.bottom_margin}`
-        }
-        placeholder="Your email"
-      ></input>
+      {isLoading && (
+        <Box sx={{ width: '100%' }}>
+          <LinearProgress />
+        </Box>
+      )}
 
-      {/* password */}
-      <div className={styles.label}>
-        <span>Password</span>
-        <span className={styles.error}> *</span>
-        {errors.password && touched.password && <span className="error">{errors.password}</span>}
-      </div>
-      <input
-        placeholder="Your password"
-        value={values.password}
-        onChange={handleChange}
-        id="password"
-        type="password"
-        onBlur={handleBlur}
-        className={
-          errors.email && touched.email ? `${styles.input} ${styles.bottom_margin} input-error` : `${styles.input} ${styles.bottom_margin}`
-        }
-      ></input>
+      {!isLoading && (
+        <>
+          {/* email */}
+          <div className={styles.label}>
+            <span>Email</span>
+            <span className={styles.error}> *</span>
+            {errors.email && touched.email && <span className="error">{errors.email}</span>}
+          </div>
+          <input
+            // className={`${styles.input} ${styles.bottom_margin}`}
+            value={values.email}
+            onChange={handleChange}
+            id="email"
+            type="email"
+            onBlur={handleBlur}
+            className={
+              errors.email && touched.email
+                ? `${styles.input} ${styles.bottom_margin} input-error`
+                : `${styles.input} ${styles.bottom_margin}`
+            }
+            placeholder="Your email"
+          ></input>
 
-      <button className={styles.brown_button}>Login</button>
+          {/* password */}
+          <div className={styles.label}>
+            <span>Password</span>
+            <span className={styles.error}> *</span>
+            {errors.password && touched.password && <span className="error">{errors.password}</span>}
+          </div>
+          <input
+            placeholder="Your password"
+            value={values.password}
+            onChange={handleChange}
+            id="password"
+            type="password"
+            onBlur={handleBlur}
+            className={
+              errors.email && touched.email
+                ? `${styles.input} ${styles.bottom_margin} input-error`
+                : `${styles.input} ${styles.bottom_margin}`
+            }
+          ></input>
+          <button className={styles.brown_button}>Login</button>
+        </>
+      )}
     </form>
   );
 }

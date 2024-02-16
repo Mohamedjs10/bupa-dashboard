@@ -5,7 +5,7 @@ import config from 'config';
 import * as actionTypes from './actions';
 
 export const initialState = {
-  isOpen: [], // for active default menu
+  isOpen: ['default'], // for active default menu
   defaultId: 'default',
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,

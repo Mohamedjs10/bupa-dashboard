@@ -13,7 +13,8 @@ import MenuList from './MenuList';
 import LogoSection from '../LogoSection';
 import MenuCard from './MenuCard';
 import { drawerWidth } from 'store/constant';
-
+import Button from '@mui/material/Button';
+import LogoutIcon from '@mui/icons-material/Logout';
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
@@ -37,19 +38,24 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
           }}
         >
           <MenuList />
+          {/* <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', position: 'absolute', bottom: '30px' }}>
+            <Button variant="contained" endIcon={<LogoutIcon />} sx={{ m: 'auto' }}>
+              Logout
+            </Button>
+          </Box> */}
           {/* <MenuCard /> */}
-          <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
+          {/* <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
             <Chip label={process.env.REACT_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} />
-          </Stack>
+          </Stack> */}
         </PerfectScrollbar>
       </BrowserView>
       <MobileView>
         <Box sx={{ px: 2 }}>
           <MenuList />
-          <MenuCard />
-          <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
+          {/* <MenuCard /> */}
+          {/* <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
             <Chip label={process.env.REACT_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} />
-          </Stack>
+          </Stack> */}
         </Box>
       </MobileView>
     </>
